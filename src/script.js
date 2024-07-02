@@ -12,7 +12,13 @@ let width = window.innerWidth;
 let height = window.innerHeight;
 
 //=================== Loader ==========================
+const dracoLoader = new DRACOLoader();
+dracoLoader.setDecoderPath('./draco/');
+// The DracoLoader will be able to use a faster version with WebAssembly and the Worker because the file is separated
+
 const gltfLoader = new GLTFLoader();
+gltfLoader.setDRACOLoader(dracoLoader);
+
 gltfLoader.load('./models/Duck/glTF-Draco/Duck.gltf', (gltf) => {
   /* const children = [...gltf.scene.children];
   for (const child of children) {
