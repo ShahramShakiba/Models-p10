@@ -40,11 +40,11 @@ gltfLoader.load('./models/Fox/glTF/Fox.gltf', (gltf) => {
 
 //=================== Floor ==========================
 const floor = new THREE.Mesh(
-  new THREE.PlaneGeometry(10, 10),
+  new THREE.PlaneGeometry(20, 20),
   new THREE.MeshStandardMaterial({
-    color: '#444444',
-    metalness: 0,
-    roughness: 0.5,
+    color: '#c1e499',
+    metalness: 0.8,
+    roughness: 0.8,
   })
 );
 floor.receiveShadow = true;
@@ -52,7 +52,7 @@ floor.rotation.x = -Math.PI * 0.5;
 scene.add(floor);
 
 //=================== Lights ========================
-const ambientLight = new THREE.AmbientLight(0xffffff, 2.4);
+const ambientLight = new THREE.AmbientLight(0xffffff, 1);
 scene.add(ambientLight);
 
 const directionalLight = new THREE.DirectionalLight(0xffffff, 1.8);
@@ -68,7 +68,7 @@ scene.add(directionalLight);
 
 //================= Camera ==========================
 const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 100);
-camera.position.set(2, 2, 2);
+camera.position.set(4, 3, 4);
 scene.add(camera);
 
 //============== Orbit Controls =====================
