@@ -15,14 +15,6 @@
 
 <br/> 
 
-> ### GLTF
- - GLTF stands for ` GL Transmission Format `. <br/> It's made by the ` Khronos Group ` (the guys behind OpenGL, WebGL, Vulkan, Collada and with many members like AMD / ATI, Nvidia, Apple, id Software, Google, Nintendo, etc.)
- - It supports very different sets of data. You can obviously have data like the geometries and the materials but you can also have data like cameras, lights, scene graph, animations, skeletons, morphing and even multiple scene.
- - It also supports various file formats like json, binary, embed textures. <br/> <br/>
- - GLTF has become the standard when it comes to real-time. <br/> And because it's becoming a standard, most 3D softwares, game engines, and libraries support it. That means that you can easily have a similar result in different environments.
-
-<br/> 
-
 > ### Lightest and Best for Performance
 #### 1. `  GLTF  ` (GL Transmission Format) 
 - _Performance_:  <br/>  " Excellent! " Designed to be compact and efficient for web use. Supports binary and JSON encoding, which allows for fast loading and minimal file sizes.
@@ -68,7 +60,86 @@
 For web-based applications using Three.js, "GLTF" is often the best choice due to its balance between performance and realism. <br/> It is optimized for fast loading, compact file sizes, and good visual fidelity, making it ideal for modern web applications.
 
  <br/>
+
  
+> ### GLTF
+ - GLTF stands for ` GL Transmission Format `. <br/> It's made by the ` Khronos Group ` (the guys behind OpenGL, WebGL, Vulkan, Collada and with many members like AMD / ATI, Nvidia, Apple, id Software, Google, Nintendo, etc.)
+ - It supports very different sets of data. You can obviously have data like the geometries and the materials but you can also have data like cameras, lights, scene graph, animations, skeletons, morphing and even multiple scene.
+ - It also supports various file formats like json, binary, embed textures. <br/> <br/>
+ - GLTF has become the standard when it comes to real-time. <br/> And because it's becoming a standard, most 3D softwares, game engines, and libraries support it. That means that you can easily have a similar result in different environments.
+
+<br/> 
+
+> ### Different formats of GLTF
+### 1. _glTF (JSON)_
+- `  Description :` <br/> This format uses a JSON file to describe the structure of the 3D model, including node hierarchies, materials, animations, and other metadata. The binary data for geometry (vertices, normals, etc.) and textures are stored in separate files.
+
+- `  Why It Exists :` <br/> To provide a clear and human-readable way to describe 3D models, separating structural information from binary data.
+
+- `  Differences :` <br/> The JSON file is separate from the binary data and textures, which are referenced by the JSON.
+
+- `  Benefits :` <br/>
+   - _Readability_ <br/> The JSON file is easy to read and edit manually if necessary.
+   - _Modularity_ <br/> Allows for separate handling and updating of geometry, textures, and structure.
+   - _Use Case_: <br/> When you need easy access to the structure and metadata of the model, or when the model data needs to be modular for updating specific components without re-uploading the entire model.
+
+- ` Use Case :`
+  - When you need easy access to the structure and metadata of the model, or when the model data needs to be modular for updating specific components without re-uploading the entire model. <br/><br/>
+
+
+### 2. _glTF-Binary (GLB)_
+- `  Description :` <br/> This format encapsulates all data (JSON, binary geometry, and textures) into a single binary file.
+
+- `  Why It Exists :` <br/> To simplify asset management by consolidating all data into one file, which also improves loading performance by minimizing the number of file requests.
+
+- `  Differences :` <br/> Combines JSON, binary data, and textures into a single file.
+
+- `  Benefits :` <br/>
+   - _Simplicity_: <br/> Easier to manage as a single file.
+   - _Performance_: <br/> Faster loading times due to fewer HTTP requests.
+   - _Use Case_: <br/> Ideal for web applications where minimizing the number of file requests is crucial for performance, and when asset management simplicity is preferred.
+
+- ` Use Case :`
+   - Ideal for web applications where minimizing the number of file requests is crucial for performance, and when asset management simplicity is preferred. <br/><br/>
+
+### 3. _glTF-Embedded_
+- `  Description :` <br/> Encodes all binary data (geometry, textures) directly within the JSON file using base64 encoding.
+
+- `  Why It Exists :` <br/> To avoid dealing with multiple files while keeping the format in a single JSON file.
+
+- `  Differences :` <br/> All data is embedded within the JSON file, leading to larger file sizes due to base64 encoding overhead.
+
+- `  Benefits :`
+   - _Single File_: <br/> All data is contained in one file, simplifying asset distribution.
+   - _No Separate Assets_:  <br/> No need to manage multiple files for a single model.
+   - _Use Case_: <br/> Useful when distributing models where having a single file is important, such as in emails or simple web pages where file management should be minimal.
+
+- ` Use Case :`
+  - Useful when distributing models where having a single file is important, such as in emails or simple web pages where file management should be minimal. <br/><br/>
+
+### 4. _glTF-Draco_
+- `  Description :` <br/> Uses Draco compression to significantly reduce the size of geometry data while maintaining the glTF format.
+
+- `  Why It Exists :` <br/> To provide a means to reduce the file size of complex geometry, thus speeding up download times and saving bandwidth.
+
+- `  Differences :` <br/> Compressed geometry data requires decompression during loading.
+
+- `  Benefits :`
+   - _Reduced File Size_: <br/> Significantly smaller files for complex models.
+   - _Efficiency_: <br/> Lower download times and bandwidth usage.]
+
+- `  Use Case :` <br/> Ideal for models with complex geometry where file size is a concern, especially in scenarios with limited bandwidth or where performance is critical. Note that this requires additional decompression time during loading. <br/><br/>
+
+
+> ### _Summary and Recommendations_
+- _glTF (JSON)_ : <br/> Best for readability and when modular handling of model components is needed. Use in scenarios where human-editable structure is beneficial.
+- _glTF-Binary (GLB)_ : <br/> Best for overall performance and simplicity. Use for web applications where minimizing file requests and simplifying asset management are important.
+- _glTF-Embedded_ :<br/> Best for situations where having a single file is crucial. Use in contexts where managing multiple files is not feasible.
+- _glTF-Draco_ : <br/> Best for reducing file sizes of complex models. Use in performance-critical applications where download size is a limiting factor, keeping in mind the decompression overhead.
+
+
+<br/><br/>
+
 > ### Why We Need to Import Models
 1. Complexity and Detail:
    - Creating complex 3D objects manually with code can be highly time-consuming and error-prone. <br/> Modeling software allows artists and developers to create intricate and detailed models that can then be imported into Three.js.
@@ -99,19 +170,6 @@ For web-based applications using Three.js, "GLTF" is often the best choice due t
 
 <br/><br/><br/>
 
-> ### _Which Concepts Have I Covered_: <br/>
-
-01. _<h4>.</h4>_
-02. _<h4>.</h4>_
-03. _<h4>.</h4>_
-04. _<h4>.</h4>_
-05. _<h4>.</h4>_
-06. _<h4>.</h4>_
-07. _<h4>.</h4>_
-08. _<h4>.</h4>_
-09. _<h4>.</h4>_
-
-<br/><br/>
 
 <!-------- try it live -------->
 #### _Give it a go in real-time and give me a Star_ &nbsp; <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Travel%20and%20places/Glowing%20Star.png" alt="Glowing Star" width="25"  /> <a href="" target="_blank"> &nbsp; _Imported Models_ </a> 
@@ -144,3 +202,17 @@ For web-based applications using Three.js, "GLTF" is often the best choice due t
   <a href="https://twitter.com/ShahramShakibaa" target="_blank">
     <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/twitter/default.svg" width="52" height="40" alt="twitter logo"  />
   </a>
+
+<!--======================= 
+> ### _Which Concepts Have I Covered_: <br/>
+
+01. _<h4>.</h4>_
+02. _<h4>.</h4>_
+03. _<h4>.</h4>_
+04. _<h4>.</h4>_
+05. _<h4>.</h4>_
+06. _<h4>.</h4>_
+07. _<h4>.</h4>_
+08. _<h4>.</h4>_
+09. _<h4>.</h4>_
+===========================-->
