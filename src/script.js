@@ -1,6 +1,8 @@
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import GUI from 'lil-gui';
 import * as THREE from 'three';
+import { GLTFLoader } from 'three/examples/jsm/Addons.js';
+import { DRACOLoader } from 'three/examples/jsm/Addons.js';
 
 const canvas = document.querySelector('canvas.webgl');
 const scene = new THREE.Scene();
@@ -8,6 +10,19 @@ const gui = new GUI({ title: 'Physics' });
 
 let width = window.innerWidth;
 let height = window.innerHeight;
+
+//=================== Loader ==========================
+const gltfLoader = new GLTFLoader();
+gltfLoader.load('./models/Duck/glTF-Draco/Duck.gltf', (gltf) => {
+  /* const children = [...gltf.scene.children];
+  for (const child of children) {
+    scene.add(child);
+  } */
+
+  // OR
+
+  scene.add(gltf.scene);
+});
 
 //=================== Floor ==========================
 const floor = new THREE.Mesh(
