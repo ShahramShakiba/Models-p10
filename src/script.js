@@ -86,6 +86,18 @@ renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.setSize(width, height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
+//=============== Resize Listener ====================
+window.addEventListener('resize', () => {
+  width = window.innerWidth;
+  height = window.innerHeight;
+
+  camera.aspect = width / height;
+  camera.updateProjectionMatrix();
+
+  renderer.setSize(width, height);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+});
+
 //=================== Animate ========================
 const clock = new THREE.Clock();
 let previousTime = 0;
